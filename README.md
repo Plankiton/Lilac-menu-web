@@ -2,5 +2,4 @@
 
 ## Protótipo
 
-![image-20210712195924384](/home/plankiton/.config/Typora/typora-user-images/image-20210712195924384.png)
-
+![assets/preview.svg](assets/preview.svg)
