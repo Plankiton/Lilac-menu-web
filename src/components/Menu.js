@@ -8,20 +8,16 @@ export default function Menu({items}) {
 
           item = item(i);
 
-          switch (typeof item) {
-            case "Object":
-              return (<li>
-                <span style={{backgroundColor: item.color}}>
-                  <a href={`#${item.color}`}>{item.label}</a>
-                </span>
-              </li>);
-            default:
-              return (<li>
-                <span style={{backgroundColor: item[2]}}>
-                  <a href={`#${item[0]}`}>{item[1]}</a>
-                </span>
-              </li>);
+          try {
+            return (<li>
+              <span style={{backgroundColor: item.color}}>
+                <a href={`#${item.color}`}>{item.label}</a>
+              </span>
+            </li>);
+          } catch {
+            return null;
           }
+          })
         })
       }</ul>
     </nav>
