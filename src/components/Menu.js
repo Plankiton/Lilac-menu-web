@@ -11,7 +11,7 @@ export default function Menu({items}) {
           try {
             return (<li>
               <span style={{backgroundColor: item.color}}>
-                <a href={`#${item.color}`}>{item.label}</a>
+                <a href={`#${item.id}`}>{item.label}</a>
               </span>
             </li>);
           } catch {
