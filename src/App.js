@@ -22,24 +22,7 @@ var cats = ["Bebidas", "Carnes", "Pizzas"].map(name => (
 var meals = [
   [
     {
-      Name: "Sangue de Joao",
-      Image: sangueJoao,
-      Desc: "Sangue do humano chamado Joao.",
-      FullDesc: "Sangue humano destilado e misturado com açucares e frutas vermelhas batidas.",
-    },
-    {
-      Name: "Sangue de Joao",
-      Image: sangueJoao,
-      Desc: "Sangue do humano chamado Joao.",
-      FullDesc: "Sangue humano destilado e misturado com açucares e frutas vermelhas batidas.",
-    },
-    {
-      Name: "Sangue de Joao",
-      Image: sangueJoao,
-      Desc: "Sangue do humano chamado Joao.",
-      FullDesc: "Sangue humano destilado e misturado com açucares e frutas vermelhas batidas.",
-    },
-    {
+      Id: 1,
       Name: "Sangue de Joao",
       Image: sangueJoao,
       Desc: "Sangue do humano chamado Joao.",
@@ -53,56 +36,8 @@ var meals = [
       Desc: "Humano de nome Joao mal passado.",
       FullDesc: "Carne humana mal passada, picada com molho verde.",
     },
-    {
-      Name: "Joao",
-      Image: joao,
-      Desc: "Humano de nome Joao mal passado.",
-      FullDesc: "Carne humana mal passada, picada com molho verde.",
-    },
-    {
-      Name: "Joao",
-      Image: joao,
-      Desc: "Humano de nome Joao mal passado.",
-      FullDesc: "Carne humana mal passada, picada com molho verde.",
-    },
-    {
-      Name: "Joao",
-      Image: joao,
-      Desc: "Humano de nome Joao mal passado.",
-      FullDesc: "Carne humana mal passada, picada com molho verde.",
-    },
-    {
-      Name: "Joao",
-      Image: joao,
-      Desc: "Humano de nome Joao mal passado.",
-      FullDesc: "Carne humana mal passada, picada com molho verde.",
-    },
   ],
   [
-    {
-      Name: "Pizza de Joao",
-      Image: pizzaJoao,
-      Desc: "Humano de nome Joao preparado em massa redonda.",
-      FullDesc: "Humano cortado em rodelas, molho de sangue do mesmo humano, queijo, ajeitona, oregano.",
-    },
-    {
-      Name: "Pizza de Joao",
-      Image: pizzaJoao,
-      Desc: "Humano de nome Joao preparado em massa redonda.",
-      FullDesc: "Humano cortado em rodelas, molho de sangue do mesmo humano, queijo, ajeitona, oregano.",
-    },
-    {
-      Name: "Pizza de Joao",
-      Image: pizzaJoao,
-      Desc: "Humano de nome Joao preparado em massa redonda.",
-      FullDesc: "Humano cortado em rodelas, molho de sangue do mesmo humano, queijo, ajeitona, oregano.",
-    },
-    {
-      Name: "Pizza de Joao",
-      Image: pizzaJoao,
-      Desc: "Humano de nome Joao preparado em massa redonda.",
-      FullDesc: "Humano cortado em rodelas, molho de sangue do mesmo humano, queijo, ajeitona, oregano.",
-    },
     {
       Name: "Pizza de Joao",
       Image: pizzaJoao,

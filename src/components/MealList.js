@@ -1,3 +1,4 @@
+import {toId} from '../util.js';
 import Meal from './Meal.js';
 
 export default function MealList({cats, meals}) {
@@ -14,8 +15,17 @@ export default function MealList({cats, meals}) {
             <a href={`#${cat.id}`}>{cat.label}</a>
           </span>
         </h1>
-        <div className="Meals">{meals[c].map(meal => {
-          return (<Meal key={meal.name+meal.Cat} image={meal.Image} name={meal.Name} desc={meal.Desc} fullDesc={meal.FullDesc} cat={meal.Cat}/>);
+        <div className="Meals">{meals[c].map((meal, pos) => {
+          return (<Meal
+            cat={meal.Cat}
+            name={meal.Name}
+            desc={meal.Desc}
+            image={meal.Image}
+            fullDesc={meal.FullDesc}
+
+            id={toId(meal.Name)}
+            key={toId(meal.Name)}
+            />);
         })}</div>
       </div>);
     })}
