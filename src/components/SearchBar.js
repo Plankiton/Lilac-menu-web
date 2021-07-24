@@ -25,6 +25,7 @@ export default function SearchBar({meals}) {
   return (
     <div className="SearchBar" id="SearchBar">
       <input
+        placeHolder="Pesquise"
         className="TextInput"
         type="text"
         onFocus={(e) => {
@@ -38,7 +39,7 @@ export default function SearchBar({meals}) {
         }}
         onKeyDown={(e) => {
           switch (e.key.toLowerCase()) {
-            case 'esc':
+            case 'escape':
               setItems(null);
               break;
             case 'enter':

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300&family=Otomanopee+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300&family=Roboto:wght@900&display=swap');
 
 /* width */
 ::-webkit-scrollbar {
@@ -38,7 +38,6 @@ html, body {
   font-family: 'Fira Sans Condensed', Arial;
 
   height: 100%;
-  width: 100%;
 
   display: flex;
   flex-direction: column;
@@ -56,7 +55,7 @@ body * {
 
 footer, header {
   height: 100%;
-  width: 100%;
+  width: available;
 
   margin: 0px;
   padding-top: 15px;
@@ -107,19 +106,23 @@ header .SearchBar {
 header .SearchBar input {
   border: none;
   width: 100%;
-  padding: 3px;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
   background-image: url(./assets/searchIcon.svg);
   background-repeat: no-repeat;
   background-position: right;
+
+  color: var(--back2);
 }
 
 .FoundItems {
   width: 100%;
-  max-height: 600px;
+  max-height: 400px;
 
+  top: 100px;
+  position: fixed;
   float: top;
 
   display: flex;
@@ -129,13 +132,14 @@ header .SearchBar input {
   overflow-y: auto;
 
   border-radius: 10px;
+  z-index: 256
 }
 
 .SearchingItem {
   width: 95%;
   height: 100%;
   margin: 5px;
-  background: #FFFFFFAA;
+  background: #FFFFFFBB;
 
   border-radius: 10px !important;
   padding: 5px;
@@ -164,7 +168,7 @@ a {
 }
 
 h1, h2 {
-  font-family: arial;
+  font-family: Roboto;
 }
 
 h1 {
@@ -188,17 +192,17 @@ h2 {
 .Menu {
   overflow-wrap: break-word;
   overflow-x: auto;
-}
+  z-index: 255;
 
-.Menu {
   top: 0;
-  position: sticky;
   width: 100%;
 
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  position: sticky;
+  scroll-snap-align: start;
 }
 
 .Menu ul {
