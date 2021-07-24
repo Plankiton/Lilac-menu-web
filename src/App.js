@@ -1,5 +1,8 @@
 import './App.css';
 
+import { useState } from 'react';
+import {colors} from './constants.js'
+
 import Footer from './components/Footer.js';
 import Head from './components/Head.js';
 import Menu from './components/Menu.js';
@@ -11,11 +14,12 @@ import pizzaJoao from './assets/pizzaJoao.jpg';
 
 var cats = ["Bebidas", "Carnes", "Pizzas"].map(name => (
   i => {
-    var color = `#${i}${i+i}${i+i+i}`;
+    var text = 'black';
+    var color = colors[i];
     var id = name;
     var label = name;
 
-    return {id, label, color};
+    return {id, label, color, text};
   }
 ))
 
@@ -48,29 +52,16 @@ var meals = [
 ];
 
 function App() {
+  const [sel, setSel] = useState(null);
   return (
     <div className="App">
-      <Head onSearch={(text) => {
-        text = text.toLowerCase().trim();
-        if (text === "")
-          return;
-
-        var found = [];
-        for (var cat of meals) {
-          for (var meal of cat) {
-            if ( meal.Name.toLowerCase().indexOf(text) >= 0
-              || meal.Desc.toLowerCase().indexOf(text) >= 0
-              || meal.FullDesc.toLowerCase().indexOf(text) >= 0 )
-              found.push(meal);
-          }
-        }
-
-        return found;
-      }}/>
+      <Head searchItems={meals}/>
 
       <div className="Content">
-        <Menu items={cats}/>
-        <MealList cats={cats} meals={meals}/>
+        <Menu items={cats} onSelect={(item, i) => {
+          setSel(item);
+        }}/>
+        <MealList cats={cats} meals={meals} selected={sel}/>
       </div>
 
       <Footer/>

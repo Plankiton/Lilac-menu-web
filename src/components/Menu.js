@@ -1,4 +1,4 @@
-export default function Menu({items}) {
+export default function Menu({items, onSelect}) {
   return (
     <nav className="Menu">
       <ul>
@@ -10,8 +10,10 @@ export default function Menu({items}) {
 
           try {
             return (<li>
-              <span style={{backgroundColor: item.color}}>
-                <a href={`#${item.id}`}>{item.label}</a>
+              <span style={{backgroundColor: item.color, color: item.text}}>
+                <a onClick={() => {
+                  onSelect(item, i);
+                }} href={`#${item.id}`} style={{color: item.text}}>{item.label}</a>
               </span>
             </li>);
           } catch {

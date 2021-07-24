@@ -1,35 +1,77 @@
 import {toId} from '../util.js';
 import React, {useState} from 'react';
-import searchIcon from '../assets/searchIcon.svg';
 
-export default function SearchBar({onSearch}) {
+export default function SearchBar({meals}) {
   const [items, setItems] = useState(null);
+  const [query, setQuery] = useState(null);
+
+  function onSearch(text) {
+    text = text.toLowerCase().trim();
+    if (text === "")
+      return;
+
+    var found = [];
+    for (var cat of meals) {
+      for (var meal of cat) {
+        if ( meal.Name.toLowerCase().indexOf(text) >= 0
+          || meal.Desc.toLowerCase().indexOf(text) >= 0
+          || meal.FullDesc.toLowerCase().indexOf(text) >= 0 )
+          found.push(meal);
+      }
+    }
+
+    return found;
+  }
   return (
-    <div className="TextInput">
+    <div className="SearchBar" id="SearchBar">
       <input
         className="TextInput"
         type="text"
+        onFocus={(e) => {
+          window.location.hash = '';
+          window.location.hash = "#SearchBar";
+          e.target.focus();
+        }}
         onChange={(e) => {
+          setQuery(e.target.value);
           setItems(onSearch(e.target.value));
         }}
-      />
-      <img src={searchIcon} alt="search icon"/>
-
-      <div className="foundItems">
-        {items && items.map((i) => {
-          return (<a className="searchingItem" href={toId(i.Name, true)}
-            onClick = {() => {
+        onKeyDown={(e) => {
+          switch (e.key.toLowerCase()) {
+            case 'esc':
               setItems(null);
+              break;
+            case 'enter':
+              window.location.hash = '';
+              if (items) {
+                window.location.hash = toId(items[0].Name, true);
+                setItems(null);
+                setQuery(null);
+              }
+              break;
+            default:
+          }
+        }}
+        value={query}
+      />
+
+      {items && (<div className="FoundItems">{
+        items.map((i) => {
+          return (<a href={toId(i.Name, true)}
+            onClick={() => {
+              setItems(null);
+              setQuery(null);
             }}
+            className="SearchingItem" 
           >
-            <div className="searchingItem">
-              <img src={i.Image} alt={i.Name+" Image"}/>
+            <div>
               <h2>{i.Name}</h2>
+              <img src={i.Image} alt={i.Name+" Image"}/>
               <p>{i.Desc}</p>
             </div>
           </a>);
-        })}
-      </div>
+        })
+        }</div>)}
     </div>
   );
 }

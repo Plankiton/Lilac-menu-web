@@ -1,3 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300&family=Otomanopee+One&display=swap');
+
+/* width */
+::-webkit-scrollbar {
+  max-width: 10px;
+  position: absolute;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #ffffff06; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #00000033;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #00000055;
+}
+
+:root {
+  --back: #F4EBD0;
+  --fore: #122620;
+  --back2: #B68D40;
+  --fore2: #F4EBD0;
+  --red: #EB9898;
+  --green: #A4FDB8;
+  --blue: #61DAFB;
+  --purple: #BBA4FD;
+}
+
+html, body {
+  font-size: 12pt;
+  font-family: 'Fira Sans Condensed', Arial;
+
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  overflow: wrap;
+
+  color: var(--fore);
+  background-color: var(--back);
+}
+
+body * {
+  border-radius: 8%;
+}
+
+footer, header {
+  height: 100%;
+  width: 100%;
+
+  margin: 0px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  text-align: center;
+
+  color: var(--fore2);
+  background-color: var(--back2);
+}
+
+header {
+  margin-bottom: 15px;
+  border-radius: 0px 0px 15px 15px;
+  flex-direction: row;
+}
+
+header .LogoAndText {
+  min-height: 80px;
+  max-height: 150px;
+  max-width: 40%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: stretch;
+  text-align: right;
+}
+
+header .LogoAndText img {
+  max-height: 80px;
+}
+
+header .SearchBar {
+  margin-right: 3%;
+  max-width: 200px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: stretch;
+}
+
+header .SearchBar input {
+  border: none;
+  width: 100%;
+  padding: 3px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-image: url(./assets/searchIcon.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.FoundItems {
+  width: 100%;
+  max-height: 600px;
+
+  float: top;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  border-radius: 10px;
+}
+
+.SearchingItem {
+  width: 95%;
+  height: 100%;
+  margin: 5px;
+  background: #FFFFFFAA;
+
+  border-radius: 10px !important;
+  padding: 5px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 10px;
+}
+
+.SearchingItem img {
+  max-width: 80px;
+}
+
+footer {
+  margin-top: 15px;
+  border-radius: 15px 15px 0px 0px;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: var(--fore);
+}
+
+h1, h2 {
+  font-family: arial;
+}
+
+h1 {
+  font-size: 17pt;
+  font-size-adjust: initial;
+}
+
+h2 {
+  font-size: 15pt;
+}
+
 .App {
   text-align: center;
 }
@@ -5,6 +183,102 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.Menu {
+  overflow-wrap: break-word;
+  overflow-x: auto;
+}
+
+.Menu {
+  top: 0;
+  position: sticky;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.Menu ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+
+  padding: 5px;
+  margin: 5px;
+}
+
+.Menu span {
+  padding: 5px;
+  border-radius: 10px;
+  color: black;
+}
+
+.Menu li {
+  list-style: none;
+  margin: 5px;
+}
+
+.Menu a {
+  text-align: center;
+}
+
+.Category {
+  padding-top: 50px;
+  scroll-snap-align: end;
+}
+
+.CategoryTitle {
+  width: 100%;
+}
+
+.CategoryTitle span {
+  border-radius: 10px;
+  width: 90%;
+  padding: 5px;
+}
+
+img {
+  width: 90%;
+  max-width: 400px;
+}
+
+.Meal {
+  padding-top: 50px;
+  margin-bottom: 15px;
+}
+
+.Meal:overlay {
+  scroll-snap-align: end;
+}
+
+@media (max-width: 512px) {
+  header {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  header .LogoAndText {
+    max-width: 100%;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 324px) {
+  header {
+    max-width: 100%;
+  }
+
+  header .LogoAndText {
+    max-width: 100%;
+    flex-direction: column;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
