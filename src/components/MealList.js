@@ -24,6 +24,7 @@ export default function MealList({cats, meals, selected}) {
             desc={meal.Desc}
             image={meal.Image}
             fullDesc={meal.FullDesc}
+            price={meal.Price}
 
             id={toId(meal.Name)}
             key={toId(meal.Name)}

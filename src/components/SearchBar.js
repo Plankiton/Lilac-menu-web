@@ -63,11 +63,11 @@ export default function SearchBar({meals}) {
               setItems(null);
               setQuery(null);
             }}
-            className="SearchingItem" 
+            className="SearchingItem"
           >
+            <img src={i.Image} alt={i.Name+" Image"}/>
             <div>
               <h2>{i.Name}</h2>
-              <img src={i.Image} alt={i.Name+" Image"}/>
               <p>{i.Desc}</p>
             </div>
           </a>);

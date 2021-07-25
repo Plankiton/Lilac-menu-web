@@ -31,6 +31,7 @@ var meals = [
       Image: sangueJoao,
       Desc: "Sangue do humano chamado Joao.",
       FullDesc: "Sangue humano destilado e misturado com açucares e frutas vermelhas batidas.",
+      Price: 72.50,
     },
   ],
   [
@@ -39,6 +40,7 @@ var meals = [
       Image: joao,
       Desc: "Humano de nome Joao mal passado.",
       FullDesc: "Carne humana mal passada, picada com molho verde.",
+      Price: 145.00,
     },
   ],
   [
@@ -47,6 +49,7 @@ var meals = [
       Image: pizzaJoao,
       Desc: "Humano de nome Joao preparado em massa redonda.",
       FullDesc: "Humano cortado em rodelas, molho de sangue do mesmo humano, queijo, ajeitona, oregano.",
+      Price: 50.00,
     },
   ],
 ];

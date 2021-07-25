@@ -1,11 +1,14 @@
-export default function Meal({name, desc, fullDesc, image, cat, id}) {
+export default function Meal({name, desc, fullDesc, image, cat, id, price}) {
   return (
     <div className="Meal" id={id}>
       <img src={image} alt={name+" Image"}/>
-      <div className="MealInfo">
-        <h1 className="MealName">{name}</h1>
-        <h3 className="MealDesc">{desc}</h3>
-        <p className="MealFullDesc">{fullDesc}</p>
+      <div className="Info">
+        <p className="Price">{price?
+            (<>{price.toFixed(2)} <span>$</span></>)
+            :null}</p>
+        <h1 className="Name">{name}</h1>
+        <h3 className="Desc">{desc}</h3>
+        <p className="FullDesc">{fullDesc}</p>
       </div>
     </div>
   );

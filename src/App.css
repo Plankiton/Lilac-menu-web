@@ -27,8 +27,11 @@
   --fore: #122620;
   --back2: #B68D40;
   --fore2: #F4EBD0;
+  --back3: #F9F3E3;
+  --fore3: #122620;
   --red: #EB9898;
   --green: #A4FDB8;
+  --green: #04FDA8;
   --blue: #61DAFB;
   --purple: #BBA4FD;
 }
@@ -136,24 +139,25 @@ header .SearchBar input {
 }
 
 .SearchingItem {
-  width: 95%;
-  height: 100%;
+  width: 400px;
+  height: content;
   margin: 5px;
   background: #FFFFFFBB;
 
   border-radius: 10px !important;
-  padding: 5px;
+  padding: 10px;
+
+  border-radius: 10px;
+  margin: none;
 
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
-
-  border-radius: 10px;
 }
 
 .SearchingItem img {
-  max-width: 80px;
+  max-width: 100px;
+  height: auto;
 }
 
 footer {
@@ -252,8 +256,31 @@ img {
 }
 
 .Meal {
-  padding-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin: 10%;
+  padding: 15px;
+  border-radius: 10px;
   margin-bottom: 15px;
+
+  background: var(--back3);
+}
+
+.Meal .Price {
+  width: 100%;
+
+  font-size: 13pt;
+
+  text-align: right;
+  font-weight: bold;
+
+  color: var(--green);
+}
+
+.Meal .Info {
+  margin: 5px;
 }
 
 .Meal:overlay {
