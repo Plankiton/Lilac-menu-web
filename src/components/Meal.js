@@ -3,12 +3,12 @@ export default function Meal({name, desc, fullDesc, image, cat, id, price}) {
     <div className="Meal" id={id}>
       <img src={image} alt={name+" Image"}/>
       <div className="Info">
-        <p className="Price">{price?
-            (<>{price.toFixed(2)} <span>$</span></>)
-            :null}</p>
         <h1 className="Name">{name}</h1>
         <h3 className="Desc">{desc}</h3>
         <p className="FullDesc">{fullDesc}</p>
+        <p className="Price">{price?
+            (<>{price.toFixed(2)} <span>$</span></>)
+            :null}</p>
       </div>
     </div>
   );

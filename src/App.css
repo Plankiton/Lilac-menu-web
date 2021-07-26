@@ -40,6 +40,7 @@ html, body {
   font-size: 12pt;
   font-family: 'Fira Sans Condensed', Arial;
 
+  width: 100%;
   height: 100%;
 
   display: flex;
@@ -57,15 +58,15 @@ body * {
 }
 
 footer, header {
+  width: 100%;
   height: 100%;
-  width: available;
 
   margin: 0px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-between;
   text-align: center;
 
@@ -74,7 +75,7 @@ footer, header {
 }
 
 header {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   border-radius: 0px 0px 15px 15px;
   flex-direction: row;
 }
@@ -82,7 +83,8 @@ header {
 header .LogoAndText {
   min-height: 80px;
   max-height: 150px;
-  max-width: 40%;
+  width: 100%;
+  max-width: 240px;
 
   display: flex;
   flex-direction: row;
@@ -97,8 +99,9 @@ header .LogoAndText img {
 
 header .SearchBar {
   margin-right: 3%;
-  max-width: 200px;
+
   width: 100%;
+  max-width: 240px;
 
   display: flex;
   flex-direction: column;
@@ -122,7 +125,7 @@ header .SearchBar input {
 
 .FoundItems {
   width: 100%;
-  max-height: 400px;
+  max-height: 200px;
 
   top: 100px;
   position: fixed;
@@ -134,15 +137,20 @@ header .SearchBar input {
   overflow-x: hidden;
   overflow-y: auto;
 
+  background: #FFFFFF33;
   border-radius: 10px;
-  z-index: 256
+  z-index: 256;
+
+  padding-top: 10px;
+  padding-bottom: 100%;
 }
 
 .SearchingItem {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: content;
   margin: 5px;
-  background: #FFFFFFBB;
+  background: #FFFFFFEE;
 
   border-radius: 10px !important;
   padding: 10px;
@@ -156,12 +164,12 @@ header .SearchBar input {
 }
 
 .SearchingItem img {
-  max-width: 100px;
+  max-height: 130px;
   height: auto;
 }
 
 footer {
-  margin-top: 15px;
+  margin-top: 10px;
   border-radius: 15px 15px 0px 0px;
   flex-direction: column;
 }
@@ -236,7 +244,6 @@ h2 {
 }
 
 .Category {
-  padding-top: 50px;
   scroll-snap-align: end;
 }
 
@@ -250,22 +257,33 @@ h2 {
   padding: 5px;
 }
 
-img {
-  width: 90%;
-  max-width: 400px;
+.MealList {
+  z-index: 254;
 }
 
 .Meal {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 
-  margin: 10%;
-  padding: 15px;
+  margin: 5px;
+  padding: 10px;
   border-radius: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 
   background: var(--back3);
+
+  width: fit-content;
+  max-width: 600px;
+}
+
+.Meal img {
+  float: left;
+
+  max-width: 40%;
+  height: fit-content;
+  margin: 5px;
 }
 
 .Meal .Price {
@@ -280,6 +298,7 @@ img {
 }
 
 .Meal .Info {
+  width: 60%;
   margin: 5px;
 }
 
@@ -299,15 +318,27 @@ img {
     align-items: center;
     justify-content: space-around;
   }
+
+  .Meal h1, .Meal p, .Meal h3 {
+    font-size: 12pt
+  }
 }
 
-@media (max-width: 324px) {
+@media (max-width: 319px) {
   header {
     max-width: 100%;
   }
 
   header .LogoAndText {
     max-width: 100%;
+    flex-direction: column;
+  }
+
+  .Meal img {
+    width: 100%;
+  }
+
+  .Meal {
     flex-direction: column;
   }
 }
