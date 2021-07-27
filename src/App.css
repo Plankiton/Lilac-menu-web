@@ -25,13 +25,12 @@
 :root {
   --back: #F4EBD0;
   --fore: #122620;
-  --back2: #B68D40;
-  --fore2: #F4EBD0;
+  --fore2: #B68D40;
+  --back2: #F4EBD0;
   --back3: #F9F3E3;
   --fore3: #122620;
   --red: #EB9898;
-  --green: #A4FDB8;
-  --green: #04FDA8;
+  --green: #00BB00;
   --blue: #61DAFB;
   --purple: #BBA4FD;
 }
@@ -72,6 +71,7 @@ footer, header {
 
   color: var(--fore2);
   background-color: var(--back2);
+  /* background: linear-gradient(166deg, rgba(255,65,65,1) 3%, rgba(200,70,70,1) 15%, rgba(242,227,66,1) 85%, rgba(242,227,93,1) 97%); */
 }
 
 header {
@@ -294,10 +294,9 @@ h2 {
 .Meal .Price {
   width: 100%;
 
-  font-size: 13pt;
-
   text-align: right;
   font-weight: bold;
+  font-size: 18pt;
 
   color: var(--green);
 }
