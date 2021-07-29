@@ -51,6 +51,7 @@ html, body {
 
   color: var(--fore);
   background-color: var(--back);
+  scroll-snap-type: x mandatory;
 }
 
 body * {
@@ -75,8 +76,7 @@ footer, header {
 }
 
 header {
-  margin-bottom: 10px;
-  border-radius: 0px 0px 15px 15px;
+  border-radius: 0px 0px 0px 0px;
   flex-direction: row;
 }
 
@@ -124,16 +124,17 @@ header .SearchBar input {
 }
 
 .FoundItems {
-  width: 100%;
+  width: max-content;
+  padding: 5px;
   max-height: 200px;
 
   top: 100px;
   position: fixed;
-  float: top;
+  right: 5px;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: stretch;
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -149,10 +150,8 @@ header .SearchBar input {
   width: 100%;
   max-width: 400px;
   height: content;
-  margin: 5px;
   background: #FFFFFFEE;
 
-  border-radius: 10px !important;
   padding: 10px;
 
   border-radius: 10px;
@@ -202,12 +201,13 @@ h2 {
 }
 
 .Menu {
-  overflow-wrap: break-word;
+  overflow-y: hidden;
   overflow-x: auto;
   z-index: 255;
 
   top: 0;
   width: 100%;
+  height: 80px;
 
   display: flex;
   flex-direction: row;
@@ -215,17 +215,20 @@ h2 {
   justify-content: center;
   position: sticky;
   scroll-snap-align: start;
+
+  border-radius: 0px 0px 15px 15px;
+  background: var(--back2);
+
+  margin-bottom: 20px;
 }
 
 .Menu ul {
+  padding: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   width: 90%;
-
-  padding: 5px;
-  margin: 5px;
 }
 
 .Menu span {
@@ -244,10 +247,18 @@ h2 {
 }
 
 .Category {
-  scroll-snap-align: end;
+  width: 100%;
+}
+
+.Category {
+  scroll-snap-align: center;
 }
 
 .CategoryTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
   width: 100%;
 }
 
@@ -255,6 +266,7 @@ h2 {
   border-radius: 10px;
   width: 90%;
   padding: 5px;
+  margin: 5px;
 }
 
 .Meals, .Category, .MealList {
@@ -281,6 +293,7 @@ h2 {
 
   width: fit-content;
   max-width: 600px;
+  scroll-snap-align: center;
 }
 
 .Meal img {
@@ -299,16 +312,12 @@ h2 {
   text-align: right;
   font-weight: bold;
 
-  color: var(--green);
+  color: var(--fore);
 }
 
 .Meal .Info {
   width: 60%;
   margin: 5px;
-}
-
-.Meal:overlay {
-  scroll-snap-align: end;
 }
 
 @media (max-width: 512px) {

@@ -14,8 +14,8 @@ import pizzaJoao from './assets/pizzaJoao.jpg';
 
 var cats = ["Bebidas", "Carnes", "Pizzas"].map(name => (
   i => {
-    var text = 'black';
-    var color = colors[i];
+    var text = 'var(--fore)';
+    var color = 'var(--back)';
     var id = name;
     var label = name;
 
@@ -58,13 +58,15 @@ function App() {
   const [sel, setSel] = useState(null);
   return (
     <div className="App">
-      <Head searchItems={meals}/>
+      <Head searchItems={meals} menuItems={cats} onSelectItem={(item, i) => {
+        setSel(item);
+      }}/>
 
       <div className="Content">
-        <Menu items={cats} onSelect={(item, i) => {
-          setSel(item);
-        }}/>
-        <MealList cats={cats} meals={meals} selected={sel}/>
+        <MealList cats={cats.map((cat, c) => {
+          cat = cat(c);
+          return {...cat, color: "var(--back2)"};
+        })} meals={meals} selected={sel}/>
       </div>
 
       <Footer/>

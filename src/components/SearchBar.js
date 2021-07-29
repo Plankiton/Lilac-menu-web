@@ -25,7 +25,7 @@ export default function SearchBar({meals}) {
   return (
     <div className="SearchBar" id="SearchBar">
       <input
-        placeHolder="Pesquise"
+        placeholder="Pesquise"
         className="TextInput"
         type="text"
         onFocus={(e) => {

@@ -5,16 +5,17 @@ export default function Menu({items, onSelect}) {
         {items.map((item, i) => {
           if ((typeof item) == "string")
             return (<li><a href={`#${item}`}>{item}</a></li>);
-
-          item = item(i);
+          else if ((typeof item) == "function") {
+            item = item(i);
+          }
 
           try {
-            return (<li>
-              <span style={{backgroundColor: item.color, color: item.text}}>
+            return (<li key={item.id}>
+              <h3><span style={{backgroundColor: item.color, color: item.text}}>
                 <a onClick={() => {
                   onSelect(item, i);
                 }} href={`#${item.id}`} style={{color: item.text}}>{item.label}</a>
-              </span>
+              </span></h3>
             </li>);
           } catch {
             return null;

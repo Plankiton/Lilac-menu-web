@@ -4,9 +4,9 @@ import Meal from './Meal.js';
 export default function MealList({cats, meals, selected}) {
   return (<div className="MealList">
     {cats.map((cat,c) => {
-      if ((typeof cat) != "string")
+      if ((typeof cat) == "function")
         cat = cat(c);
-      else
+      else if ((typeof cat) == "string")
         cat = {id: cat, label: cat, color: "#00000000"};
       if (cat.sel && selected && cat.id !== selected.id)
         cat.color = cat.sel;
