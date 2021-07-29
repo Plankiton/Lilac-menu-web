@@ -6,7 +6,7 @@ export default function Head({searchItems}) {
     <header>
       <div className='LogoAndText'>
         <img src={Logo} className="App-logo" alt="logo" />
-        <h1>Restaurante<br/>Pre Amar</h1>
+        <h1>Restaurante<br/>Pra Amar</h1>
       </div>
       <SearchBar meals={searchItems}/>
     </header>
