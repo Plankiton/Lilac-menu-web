@@ -1,0 +1,3 @@
+atasks:
+  - init: yarn install && yarn run build
+    command: yarn run start
