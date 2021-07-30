@@ -1,0 +1,32 @@
+version: "3.1"
+services:
+  api:
+    environment:
+      - PREAMAR_DATABASE_URL=
+    restart: always
+    build: ./api/
+    image: preamar:api
+    working_dir: /PreAmar
+    tty: true
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - 80:8000
+    volumes:
+      - ./:/PreAmar
+    command: ./PreAmar
+  front:
+    restart: always
+    build: .
+    image: preamar:front
+    working_dir: /PreAmar
+    tty: true
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - 80:3000
+    volumes:
+      - ./:/PreAmar
+    command: yarn start
+    links:
+      - api:api
