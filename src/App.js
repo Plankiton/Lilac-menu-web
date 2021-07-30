@@ -1,11 +1,11 @@
 import './App.css';
 
-import { useState } from 'react';
+import {useState} from 'react';
+import {toId} from './util.js';
 import {colors} from './constants.js'
 
 import Footer from './components/Footer.js';
 import Head from './components/Head.js';
-import Menu from './components/Menu.js';
 import MealList from './components/MealList.js';
 
 import sangueJoao from './assets/sangueJoao.jpg';
@@ -16,7 +16,7 @@ var cats = ["Bebidas", "Carnes", "Pizzas"].map(name => (
   i => {
     var text = 'var(--fore)';
     var color = 'var(--back)';
-    var id = name;
+    var id = toId(name);
     var label = name;
 
     return {id, label, color, text};
