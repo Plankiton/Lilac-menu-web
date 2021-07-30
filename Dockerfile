@@ -5,3 +5,4 @@ ADD . /PreAmar
 WORKDIR /PreAmar/
 RUN yarn install
 RUN yarn build
+RUN yarn global add serve
