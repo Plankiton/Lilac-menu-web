@@ -1,5 +1,5 @@
 FROM node:16-buster as node
-RUN apt update && apt install yarn -y
+RUN apt update && apt install yarn xsel xclip -y
 
 ADD . /PreAmar
 WORKDIR /PreAmar/
