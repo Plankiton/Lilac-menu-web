@@ -1,6 +1,8 @@
 package main
 
 import (
+	Str "strings"
+
 	Sex "github.com/Plankiton/SexPistol"
 	SexDB "github.com/Plankiton/SexPistol/Cartridge"
 	mysql "gorm.io/driver/mysql"
@@ -31,11 +33,26 @@ func main() {
 		}
 
 		for c, cat := range cats {
-			db.Joins("join categories cat on cat.ID = CatID").Find(&cats[c].Meals)
-			Sex.SuperPut(cat, cats[c])
+			db.Joins("join categoria cat on cat.ID = id_categoria").Find(&cat.Meals)
+			cat.Name = Cap(cat.Name)
+			for m, meal := range cat.Meals {
+				cat.Meals[m].Name = Cap(meal.Name)
+				cat.Meals[m].Desc = Cap(meal.Desc)
+			}
+
+			cats[c] = cat
 		}
 
 		return cats
 	}).
 	Run())
 }
+
+func Cap(t string) string {
+	if len(t) <= 1 {
+		return Str.ToUpper(t)
+	}
+
+	return Str.ToUpper(t[:1])+Str.ToLower(t[1:])
+}
+

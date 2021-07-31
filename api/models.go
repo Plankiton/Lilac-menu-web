@@ -9,9 +9,8 @@ type Category struct {
 
 type Meal struct {
 	SexDB.Model
-	Name       string  `json:"Name,omitempty" gorm:"column:codigo"`
-	Desc       string  `json:"Desc,omitempty" gorm:"column:descricao"`
-	FullDesc   string  `json:"FullDesc,omitempty" gorm:"column:descricao_detalhada"`
+	Name       string  `json:"Name,omitempty" gorm:"column:descricao"`
+	Desc   string  `json:"Desc,omitempty" gorm:"column:descricao_detalhada"`
 	Price      float64 `json:"Price,omitempty" gorm:"column:preco_venda"`
 
 	CatID      uint    `json:"-" gorm:"column:id_categoria"`
