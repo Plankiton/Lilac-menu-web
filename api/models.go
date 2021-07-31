@@ -3,23 +3,23 @@ import SexDB "github.com/Plankiton/SexPistol/Cartridge"
 
 type Category struct {
 	SexDB.Model
-	Name       string `json:"name,omitempty"`
+	Name       string `json:"name,omitempty" gorm:"column:descricao"`
 	Meals      []Meal `json:"meals" gorm:"foreignKey:CatID"`
 }
 
 type Meal struct {
 	SexDB.Model
-	Name       string  `json:"Name,omitempty"`
-	Desc       string  `json:"Desc,omitempty"`
-	FullDesc   string  `json:"FullDesc,omitempty"`
-	Price      float64 `json:"Price,omitempty"`
+	Name       string  `json:"Name,omitempty" gorm:"column:codigo"`
+	Desc       string  `json:"Desc,omitempty" gorm:"column:descricao"`
+	FullDesc   string  `json:"FullDesc,omitempty" gorm:"column:descricao_detalhada"`
+	Price      float64 `json:"Price,omitempty" gorm:"column:preco_venda"`
 
-	CatID      uint
+	CatID      uint    `json:"-" gorm:"column:id_categoria"`
 }
 
 func(*Category) TableName() string{
-	return "Categories"
+	return "categoria"
 }
 func(*Meal) TableName() string{
-	return "Meals"
+	return "produtos"
 }
