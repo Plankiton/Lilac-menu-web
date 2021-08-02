@@ -1,6 +1,5 @@
 import './App.css';
 
-import {Axios} from 'axios';
 import {useState} from 'react';
 import {toId, api} from './util.js';
 
