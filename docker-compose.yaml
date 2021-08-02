@@ -17,8 +17,10 @@ services:
       - 8000:8000
     volumes:
       - ./:/PreAmar
-    command: go run .
+    command: air
   front:
+    environment:
+      - SEX_DEBUG=true
     restart: always
     build: .
     image: preamar:front
@@ -27,9 +29,10 @@ services:
     security_opt:
       - seccomp:unconfined
     ports:
-      - 5000:5000
+      - 80:5000
+      - 3000:3000
     volumes:
       - ./:/PreAmar
-    command: serve -s build
+    command: yarn start
     links:
       - api:api

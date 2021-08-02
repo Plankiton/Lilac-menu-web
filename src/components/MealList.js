@@ -3,7 +3,7 @@ import Meal from './Meal.js';
 
 export default function MealList({cats, meals, selected}) {
   return (<div className="MealList">
-    {cats.map((cat,c) => {
+    {cats&&cats.map((cat,c) => {
       if ((typeof cat) == "function")
         cat = cat(c);
       else if ((typeof cat) == "string")
@@ -17,7 +17,7 @@ export default function MealList({cats, meals, selected}) {
             <a href={`#${cat.id}`} style={{color: cat.text}}>{cat.label}</a>
           </span>
         </h1>
-        <div className="Meals">{meals[c].map((meal, pos) => {
+        <div className="Meals">{meals&&meals[c].map((meal, pos) => {
           return (<Meal
             cat={meal.Cat}
             name={meal.Name}

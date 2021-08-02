@@ -1,7 +1,8 @@
+import imageNotFound from '../assets/image-not-found.jpg';
 export default function Meal({name, desc, fullDesc, image, cat, id, price}) {
   return (
     <div className="Meal" id={id}>
-      <img src={image} alt={name+" Image"}/>
+      <img src={image?image:imageNotFound} alt={name+" Image"}/>
       <div className="Info">
         <h1 className="Name">{name}</h1>
         <h3 className="Desc">{desc}</h3>

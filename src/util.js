@@ -1,8 +1,8 @@
 import axios from 'axios';
+
 export const api = axios.create({
-	baseURL: process.env.PREAMAR_API_URL,
+	baseURL: 'http://localhost:8000',
 	timeout: 1000,
-	headers: {'Access-Control-Allow-Origin': '*'}
 });
 
 export function toId(text, isLink = false) {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	Str "strings"
 
 	Sex "github.com/Plankiton/SexPistol"
@@ -24,7 +25,7 @@ func main() {
 		new(Meal),
 	)
 
-	Sex.Err(Sex.NewPistol().
+	pistol := Sex.NewPistol().
 	Add("/", func (Sex.Request) Sex.Json {
 		cats := [] Category {}
 
@@ -44,8 +45,9 @@ func main() {
 		}
 
 		return cats
-	}).
-	Run())
+	})
+
+	Sex.Err(http.ListenAndServe(":8000", Cors(pistol)))
 }
 
 func Cap(t string) string {
