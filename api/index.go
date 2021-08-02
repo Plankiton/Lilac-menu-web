@@ -1,6 +1,6 @@
 package handler
 import (
-	api "github.com/Plankiton/PraAmar/back"
+	api "github.com/Plankiton/PraAmar-back"
 	"net/http"
 )
 
