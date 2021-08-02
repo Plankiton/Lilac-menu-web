@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export const api = axios.create({
-	baseURL: 'http://localhost:8000',
-	timeout: 1000,
+	baseURL: '',
+	timeout: 100000000,
 });
 
 export function toId(text, isLink = false) {

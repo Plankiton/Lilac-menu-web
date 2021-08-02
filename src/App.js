@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App" onLoad={() => {
-      api.get("/?page=1&limit=10").then(res => {
+      api.get("/api/?page=1&limit=10").then(res => {
         var cats = [];
         var meals = [];
 
