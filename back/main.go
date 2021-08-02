@@ -11,7 +11,7 @@ import (
 	mysql "gorm.io/driver/mysql"
 )
 
-func SetUp() Http.Handler {
+func Setup() Http.Handler {
 	driver, uri := mysql.Open, Sex.GetEnv("PREAMAR_DATABASE_URL", "test.db")
 	if Sex.GetEnv("SEX_DEBUG", "false") != "false" {
 		driver, uri = SexDB.Sqlite, "test.db"
@@ -29,12 +29,6 @@ func SetUp() Http.Handler {
 
 	pistol := Sex.NewPistol().
 	Add("/", func (r Sex.Request) Sex.Json {
-		/*page, err := StrConv.Atoi(r.URL.Query().Get("page"))
-		if err != nil {
-			page = 1
-		}
-		limit := 10*/
-
 		cats := [] Category {}
 		if db.Find(&cats).Error != nil {
 			return nil
