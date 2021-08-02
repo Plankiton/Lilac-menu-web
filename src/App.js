@@ -1,8 +1,8 @@
 import './App.css';
 
+import {Axios} from 'axios';
 import {useState} from 'react';
-import {toId} from './util.js';
-import {colors} from './constants.js'
+import {toId, api} from './util.js';
 
 import Footer from './components/Footer.js';
 import Head from './components/Head.js';
@@ -53,6 +53,12 @@ var meals = [
     },
   ],
 ];
+
+api.get("/").then(res => {
+  console.log(res);
+}).catch((e) => {
+  console.log("ESTA PORRA AQUI: ", e);
+})
 
 function App() {
   const [sel, setSel] = useState(null);
