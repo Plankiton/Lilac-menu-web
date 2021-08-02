@@ -1,7 +1,9 @@
 package main
 
 import (
-	"net/http"
+	Http "net/http"
+
+	//StrConv "strconv"
 	Str "strings"
 
 	Sex "github.com/Plankiton/SexPistol"
@@ -9,7 +11,7 @@ import (
 	mysql "gorm.io/driver/mysql"
 )
 
-func main() {
+func SetUp() Http.Handler {
 	driver, uri := mysql.Open, Sex.GetEnv("PREAMAR_DATABASE_URL", "test.db")
 	if Sex.GetEnv("SEX_DEBUG", "false") != "false" {
 		driver, uri = SexDB.Sqlite, "test.db"
@@ -26,15 +28,22 @@ func main() {
 	)
 
 	pistol := Sex.NewPistol().
-	Add("/", func (Sex.Request) Sex.Json {
-		cats := [] Category {}
+	Add("/", func (r Sex.Request) Sex.Json {
+		/*page, err := StrConv.Atoi(r.URL.Query().Get("page"))
+		if err != nil {
+			page = 1
+		}
+		limit := 10*/
 
+		cats := [] Category {}
 		if db.Find(&cats).Error != nil {
 			return nil
 		}
 
 		for c, cat := range cats {
-			db.Joins("join categoria cat on cat.ID = id_categoria").Find(&cat.Meals)
+			db.Joins("join categoria cat on cat.ID = id_categoria").
+			
+			Find(&cat.Meals)
 			cat.Name = Cap(cat.Name)
 			for m, meal := range cat.Meals {
 				cat.Meals[m].Name = Cap(meal.Name)
@@ -47,7 +56,7 @@ func main() {
 		return cats
 	})
 
-	Sex.Err(http.ListenAndServe(":8000", Cors(pistol)))
+	return Cors(pistol)
 }
 
 func Cap(t string) string {
