@@ -9,33 +9,36 @@ import MealList from './components/MealList.js';
 
 function App() {
   const [sel, setSel] = useState(null);
+  const [loaded, setLoaded] = useState(false);
   const [cats, setCats] = useState(null);
   const [meals, setMeals] = useState(null);
 
   return (
     <div className="App" onLoad={() => {
-      api.get("/?page=1&limit=10").then(res => {
-        var cats = [];
-        var meals = [];
+      if (!loaded) {
+        api.get("/?page=1&limit=10").then(res => {
+          var cats = [];
+          var meals = [];
 
-        var i = 0;
-        for (var cat of res.data) {
-          meals.push([]);
-          cats.push({color: "var(--back)", text: "var(--fore)", label: cat.name, id: toId(cat.name)})
-          for (var meal of cat.meals) {
-            meals[i].push({...meal, cat: i});
+          var i = 0;
+          for (var cat of res.data) {
+            meals.push([]);
+            cats.push({color: "var(--back)", text: "var(--fore)", label: cat.name, id: toId(cat.name)})
+            for (var meal of cat.meals) {
+              meals[i].push({...meal, cat: i});
+            }
+
+            i++;
           }
 
-          i++;
-        }
-
-        setCats(cats);
-        setMeals(meals);
-        console.log(cats, meals);
-      }).catch((e) => {
-        console.log("ESTA PORRA AQUI: ", e);
-      })
-      }}>
+          setCats(cats);
+          setMeals(meals);
+          setLoaded(true);
+        }).catch((e) => {
+          console.log("ESTA PORRA AQUI: ", e);
+        })
+      }
+    }}>
       <Head searchItems={meals} menuItems={cats} onSelectItem={(item, i) => {
         setSel(item);
       }}/>
