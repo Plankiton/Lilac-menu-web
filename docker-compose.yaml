@@ -3,6 +3,7 @@ services:
   front:
     environment:
       - SEX_DEBUG=true
+      - 'REACT_APP_URL_API=http://localhost:8000'
     restart: always
     build: .
     image: preamar:front
@@ -16,5 +17,3 @@ services:
     volumes:
       - ./:/PreAmar
     command: yarn start
-    links:
-      - api:api
