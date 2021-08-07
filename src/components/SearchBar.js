@@ -13,9 +13,9 @@ export default function SearchBar({meals}) {
     var found = [];
     for (var cat of meals) {
       for (var meal of cat) {
-        if ( meal.Name.toLowerCase().indexOf(text) >= 0
-          || meal.Desc.toLowerCase().indexOf(text) >= 0
-          || meal.FullDesc.toLowerCase().indexOf(text) >= 0 )
+        if ( (meal.Name && meal.Name.toLowerCase().indexOf(text) >= 0)
+          || (meal.Desc && meal.Desc.toLowerCase().indexOf(text) >= 0)
+          || (meal.FullDesc && meal.FullDesc.toLowerCase().indexOf(text) >= 0))
           found.push(meal);
       }
     }

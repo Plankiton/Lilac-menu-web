@@ -134,7 +134,7 @@ header .LogoAndText img {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  overflow-x: hidden;
+  overflow-x: wrap;
   overflow-y: auto;
 
   background: #FFFFFF33;
@@ -233,8 +233,6 @@ h2 {
   overflow-x: auto;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
   width: 90%;
 
   margin: 0px;
@@ -266,11 +264,9 @@ h2 {
 }
 
 .Category {
-  width: 100%;
-}
-
-.Category {
   scroll-snap-align: center;
+  overflow-x: auto;
+  max-height: 600px;
 }
 
 .CategoryTitle {
@@ -289,12 +285,20 @@ h2 {
 }
 
 .Meals, .Category, .MealList {
-  width: 100%;
+  width: content;
   display: flex;
   flex-direction: Column;
   align-items: center;
 
   z-index: 254;
+}
+
+.PaddingTop {
+  overflow-y: hidden;
+  padding-top: 100px;
+  position: initial;
+  float: initial;
+  margin-top: -100px;
 }
 
 .Meal {
