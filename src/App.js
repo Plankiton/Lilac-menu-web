@@ -1,87 +1,123 @@
 import './App.css';
 
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {toId, api} from './util.js';
 
 import Footer from './components/Footer.js';
 import Head from './components/Head.js';
+import Menu from './components/Menu.js';
 import MealList from './components/MealList.js';
 
-function GetCatDataPage({page, onGetCat, onGetMeals, catId}) {
-  api.get("/cat/"+ (catId?String(catId):"") +"?"+ (page?String(page):"1") +"&limit=99999").then(res => {
-    var cat = res.data
-    var meals = [];
+function getMeals({page, omeals, ocats, setMeals, setCats, lock, setLock}) {
+  if (!lock) {
+    setLock(true);
 
-    for (var meal of cat.meals) {
-      meals.push({...meal, cat: cat.db_id});
-    }
+    api.get(`/meals/?page=${page}`).then(res => {
+      var cats = ocats?ocats:[];
+      var meals = omeals?omeals:[];
 
-    onGetMeals(meals);
-  }).catch((e) => {
-    console.log("ESTA PORRA AQUI: ", e);
-  })
+      var i = cats.length;
+      for (var cat of res.data) {
+        meals.push([]);
+        cats.push({...cat, color: "var(--back)", text: "var(--fore)", label: cat.name, id: toId(cat.name), page})
+        for (var meal of cat.meals) {
+          meals[i].push({...meal, cat: i});
+        }
+
+        i++;
+      }
+
+      setCats(cats);
+      setMeals(meals);
+      setLock(false);
+    }).catch((e) => {
+      console.log("ESTA PORRA AQUI: ", e);
+    })
+  }
 }
 
-function GetCats({page, onGetCats, onGetMeals}) {
-  api.get("/cats").then(res => {
-    var cats = [];
-    var meals = [];
+function getMealsFromCat({cat, setMeals, omeals, lock, setLock}) {
+  if (!lock) {
+    setLock(true);
 
-    for (var cat of res.data) {
-      meals.push([]);
-      cats.push({color: "var(--back)", text: "var(--fore)", label: cat.name, id: toId(cat.name)})
-    }
+    api.get(`/cat/${cat.db_id}/meals?page=${cat.page}&limit=10`).then(res => {
+      var meals = omeals?omeals:[];
 
-    onGetCats(cats);
-  }).catch((e) => {
-    console.log("ESTA PORRA AQUI: ", e);
-  })
+      for (var meal of res.data.meals) {
+        meals[cat.index].push({...meal, cat: cat.index});
+        if (meals.length >= cat.meal_count)
+        meals[cat.index][meals[cat.index].length-1] = {charging: false};
+      }
+
+      setMeals(meals);
+
+      setLock(false);
+    }).catch((e) => {
+      console.log("ESTA PORRA AQUI: ", e);
+    })
+  }
 }
 
 function App() {
   const [sel, setSel] = useState(null);
+  const [page, setPage] = useState(1);
   const [cats, setCats] = useState(null);
   const [meals, setMeals] = useState(null);
-  const [catPage, setCatPage] = useState({});
-  const [loaded, setLoaded] = useState(false);
+
+  const [lock, setLock] = useState(false);
 
   return (
-    <div className="App" onLoad={() => {
-      if (!loaded) {
-        GetCats({
-          page: 1,
-          onGetCats: (cats) => setCats(cats),
-          onGetMeals: (meals) => {
-            setMeals(meals);
-            setLoaded(true);
-          }
-        });
-      }
-    }}>
-      <Head searchItems={meals} menuItems={cats} onSelectItem={(item, i) => {
+    <div className="App"
+      onLoad={() => {
+        if (!meals) {
+          getMeals({
+            page: page,
+            ocats: cats,
+            omeals: meals,
+
+            setCats,
+            setMeals,
+            lock,
+            setLock,
+          });
+
+          setMeals(meals);
+        }
+      }}>
+      <Head/>
+      <Menu items={cats} onSearch={() => {}} onSelect={(item, i) => {
         setSel(item);
       }}/>
 
       <div className="Content">
         <MealList
-          cats={cats&&cats.map((cat, index) => {
-            return {...cat, color: "var(--back2)", text: "var(--fore2)", index};
-          })}
-          onCatScrollEnd={(cat) => {
-            setCatPage({...catPage, cat: catPage[cat.index]+1});
-            GetCatDataPage({
-              cat: cat.db_id,
-              page: catPage[cat.index],
-              onGetCat: (new_cat) => setCats({...cats, new_cat}),
-              onGetMeals: (new_meals) => {
-                var mealsf = meals;
-                for (var meal of meals) {
-                  mealsf[new_meals[0].cat-1].push(meal);
-                }
-                setMeals(mealsf);
-              }
-            })
+          onSetCats={(cat, cats) => {
+            if (meals[cat.index].length < cat.meal_count) {
+              setCats(cats);
+            }
           }}
+          onCatScrollEnd={async (cat) => {
+            if (meals[cat.index].length < cat.meal_count) {
+              await getMealsFromCat({
+                lock: lock,
+                setLock: setLock,
+
+                omeals: meals,
+                meal_count: cat.meal_count,
+
+                cat,
+                setMeals: (meals) => {
+                  var ncats = cats;
+                  ncats[cat.index].page += 1;
+                  setCats(ncats);
+                  setMeals([...new Set(meals)]);
+                },
+              })
+            }
+          }}
+          cats={cats&&cats.map(cat => {
+            return {...cat};
+          })}
           meals={meals} selected={sel}/>
       </div>
 

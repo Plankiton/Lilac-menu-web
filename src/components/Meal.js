@@ -1,11 +1,16 @@
-import imageNotFound from '../assets/image-not-found.jpg';
-export default function Meal({name, desc, fullDesc, image, cat, id, price}) {
+export default function Meal({name, desc, fullDesc, db_id, cat, id, price}) {
+  var image = null;
+  try {
+    image = require(`../assets/${db_id}`);
+  } catch (e) {
+  }
+
   return (
     <div>
       <div className="PaddingTop" id={id}>
       </div>
       <div className="Meal">
-        <img src={image?image:imageNotFound} alt={name+" Image"}/>
+        <img src={image} alt={name+" Image"}/>
         <div className="Info">
           <h1 className="Name">{name}</h1>
           <h3 className="Desc">{desc}</h3>
