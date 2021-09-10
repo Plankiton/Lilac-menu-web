@@ -1,8 +1,10 @@
-export default function Meal({name, desc, fullDesc, db_id, cat, id, price}) {
-  var image = null;
+import {toId} from '../util.js';
+
+export default function Meal({scroll, setScroll, pos, length, name, desc, fullDesc, db_id, cat, id, price}) {
   try {
-    image = require(`../assets/${db_id}`);
+    var image = require(`../assets/${db_id}`).default;
   } catch (e) {
+    image = require('../assets/image-not-found.jpg').default;
   }
 
   return (

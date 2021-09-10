@@ -4,26 +4,6 @@ import Meal from './Meal.js';
 import Charging from './Charging.js';
 
 export default function MealList({cats, meals, selected, onCatScrollEnd, onSetCats}) {
-  const [lastPos, setLastPos] = useState(null);
-  const [e, setE] = useState(null);
-
-  useEffect(() => {
-    if (lastPos && e) {
-      console.log("SCROLLANDO ESSA DESGRACA", e.target.scrollTop, "->", lastPos)
-      e.target.scrollIntoView({block: "end"});
-      e.target.scrollTo({block: "end"});
-      e.target.scrollTo(0, lastPos);
-      if (e.target.scrollTop === 0)
-        e.target.scrollTop = lastPos;
-      console.log("SCROLLANDO ESSA DESGRACA", e.target.scrollTop, "->", lastPos)
-      if (e.target.scrollTop === 0)
-        e.target.scrollTo(0,lastPos);
-      console.log("SCROLLANDO ESSA DESGRACA", e.target.scrollTop, "->", lastPos)
-      console.log("SCROLLANDO ESSA DESGRACA", e.target.scrollTop, "->", lastPos)
-      setLastPos(null);
-      setE(null);
-    }
-  }, [lastPos, e])
 
   return (<div className="MealList">
     {cats&&cats.map((cat,c) => {
@@ -52,14 +32,10 @@ export default function MealList({cats, meals, selected, onCatScrollEnd, onSetCa
           onScroll={async (e) => {
             e.preventDefault();
             if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight-1) {
-              setLastPos(e.target.scrollTop);
-
               cat.page += 1;
               cats[cat.index] = cat
               onSetCats(cat, cats);
               await onCatScrollEnd(cat)
-
-              setE(e);
             }
           }}
           >

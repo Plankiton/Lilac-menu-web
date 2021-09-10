@@ -12,7 +12,7 @@ function getMeals({page, omeals, ocats, setMeals, setCats, lock, setLock}) {
   if (!lock) {
     setLock(true);
 
-    api.get(`/meals/?page=${page}`).then(res => {
+    api.get(`/meals/?page=${page}&limit=3`).then(res => {
       var cats = ocats?ocats:[];
       var meals = omeals?omeals:[];
 
@@ -40,13 +40,12 @@ function getMealsFromCat({cat, setMeals, omeals, lock, setLock}) {
   if (!lock) {
     setLock(true);
 
-    api.get(`/cat/${cat.db_id}/meals?page=${cat.page}&limit=10`).then(res => {
+    api.get(`/cat/${cat.db_id}/meals?limit=999999`).then(res => {
       var meals = omeals?omeals:[];
 
+      meals[cat.index] = [];
       for (var meal of res.data.meals) {
         meals[cat.index].push({...meal, cat: cat.index});
-        if (meals.length >= cat.meal_count)
-        meals[cat.index][meals[cat.index].length-1] = {charging: false};
       }
 
       setMeals(meals);
@@ -87,6 +86,22 @@ function App() {
       <Head/>
       <Menu items={cats} onSearch={() => {}} onSelect={(item, i) => {
         setSel(item);
+
+        getMealsFromCat({
+          lock: lock,
+          setLock: setLock,
+
+          omeals: meals,
+          meal_count: item.meal_count,
+
+          cat: item,
+          setMeals: (meals) => {
+            var ncats = cats;
+            ncats[item.index] = item;
+            setCats(ncats);
+            setMeals([...new Set(meals)]);
+          },
+        })
       }}/>
 
       <div className="Content">
@@ -108,7 +123,7 @@ function App() {
                 cat,
                 setMeals: (meals) => {
                   var ncats = cats;
-                  ncats[cat.index].page += 1;
+                  ncats[cat.index] = cat;
                   setCats(ncats);
                   setMeals([...new Set(meals)]);
                 },

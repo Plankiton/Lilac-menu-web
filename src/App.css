@@ -36,7 +36,7 @@
   --purple: #BBA4FD;
 }
 
-html, body {
+html, body, .Content {
   font-size: 12pt;
   font-family: 'Fira Sans Condensed', Arial;
 
@@ -293,19 +293,21 @@ h2 {
 
 .Meals, .Category, .MealList {
   width: content;
+  max-width: 600px;
   display: flex;
   flex-direction: Column;
   align-items: center;
+  overflow-x: wrap;
 
   z-index: 254;
 }
 
-.Meals {
-  justify-content: end;
+.Category {
+  width: 90%;
 }
 
-.Category {
-  max-width: 90%;
+.Meals {
+  margin: 5px;
 }
 
 .MealList {
@@ -325,34 +327,37 @@ h2 {
   flex-direction: row;
   justify-content: space-between;
   align-items: space-between;
+  align-self: stretch;
 
   margin: 5px;
-  padding: 10px;
+  padding: 5px;
   border-radius: 10px;
   margin-bottom: 10px;
 
   background: var(--back3);
 
-  width: 100%;
+  width: 90%;
   max-width: 600px;
   scroll-snap-align: center;
 }
 
 .Meal img {
   float: left;
-  width: 100%;
+  width: content;
+  max-width: 40%;
   height: 100%;
 
   min-height: 100px;
-  min-width: 200px;
-
-  max-width: 40%;
   height: fit-content;
+  max-height: 200px;
   margin: 5px;
 
   background-image: url("./assets/image-not-found.jpg");
   background-repeat: no-repeat;
-  background-position: cover;
+  background-size: cover;
+  background-position: center;
+  background-color: #DDD;
+  border-radius: 10px;
 }
 
 .Meal .Price {
@@ -385,7 +390,7 @@ h2 {
   }
 
   .Meal h1, .Meal p, .Meal h3 {
-    font-size: 12pt
+    font-size: 12pt;
   }
 }
 
@@ -404,7 +409,7 @@ h2 {
   }
 
   .Meal img {
-    width: 100%;
+    max-width: 80%;
   }
 
   .Meal {
