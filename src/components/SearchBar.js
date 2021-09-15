@@ -1,27 +1,15 @@
 import {toId} from '../util.js';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
-export default function SearchBar({meals}) {
+export default function SearchBar({onSearch, onItemFounds, onSelectSearch}) {
   const [items, setItems] = useState(null);
   const [query, setQuery] = useState(null);
+  const [founds, setFounds] = useState(false);
 
-  function onSearch(text) {
-    text = text.toLowerCase().trim();
-    if (text === "")
-      return;
-
-    var found = [];
-    for (var cat of meals) {
-      for (var meal of cat) {
-        if ( (meal.Name && meal.Name.toLowerCase().indexOf(text) >= 0)
-          || (meal.Desc && meal.Desc.toLowerCase().indexOf(text) >= 0)
-          || (meal.FullDesc && meal.FullDesc.toLowerCase().indexOf(text) >= 0))
-          found.push(meal);
-      }
-    }
-
-    return found;
-  }
+  useEffect(() => {
+    console.log(items)
+    onItemFounds(founds);
+  }, [founds, items])
   return (
     <div className="SearchBar" id="SearchBar">
       <input
@@ -29,15 +17,28 @@ export default function SearchBar({meals}) {
         className="TextInput"
         type="text"
         onFocus={(e) => {
-          window.location.hash = '';
-          window.location.hash = "#SearchBar";
-          e.target.focus();
+          if (window.location.hash !== "#SearchBar") {
+            window.location.hash = '';
+            window.location.hash = "#SearchBar";
+            e.target.focus();
+          }
         }}
-        onChange={(e) => {
+        onChange={async (e) => {
+          if (window.location.hash !== "#SearchBar") {
+            window.location.hash = '';
+            window.location.hash = "#SearchBar";
+          }
+
           setQuery(e.target.value);
-          setItems(onSearch(e.target.value));
+          if (e.target.value.length >= 5) {
+            var meals = await onSearch(e.target.value);
+            console.log(meals);
+            if (meals.length > 0) {
+              setItems(meals);
+            }
+          }
         }}
-        onKeyDown={(e) => {
+        onKeyDown={async (e) => {
           switch (e.key.toLowerCase()) {
             case 'escape':
               setItems(null);
@@ -48,6 +49,12 @@ export default function SearchBar({meals}) {
                 window.location.hash = toId(items[0].Name, true);
                 setItems(null);
                 setQuery(null);
+              } else {
+                var meals = await onSearch(e.target.value);
+                console.log(meals);
+                if (meals.length > 0) {
+                  setItems(meals);
+                }
               }
               break;
             default:
@@ -56,22 +63,27 @@ export default function SearchBar({meals}) {
         value={query}
       />
 
-      {items && (<div className="FoundItems">{
-        items.map((i) => {
-          return (<a href={toId(i.Name, true)}
-            onClick={() => {
-              setItems(null);
-              setQuery(null);
-            }}
-            className="SearchingItem"
-          >
-            <img src={i.Image} alt={i.Name+" Image"}/>
-            <div>
-              <h2>{i.Name}</h2>
-              <p>{i.Desc}</p>
-            </div>
-          </a>);
-        })
+      {items&&(<div
+        className="FoundItems"
+        onLoad={(e) => {
+          setFounds(true);
+        }}>{
+          items.map((i, i_pos) => {
+            return (<a href={toId(i.Name, true)}
+              onClick={() => {
+                onSelectSearch(i.cat, i);
+                setItems(null);
+                setQuery(null);
+              }}
+              className="Meal"
+            >
+              <img src={i.Image} alt={i.Name+" Image"}/>
+              <div>
+                <h2>{i.Name}</h2>
+                <p>{i.Desc}</p>
+              </div>
+            </a>);
+          })
         }</div>)}
     </div>
   );

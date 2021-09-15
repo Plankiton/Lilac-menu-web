@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {toId} from '../util.js';
 import Meal from './Meal.js';
 import Charging from './Charging.js';

@@ -54,6 +54,10 @@ html, body, .Content {
   scroll-snap-type: x mandatory;
 }
 
+.Content {
+  align-items: center;
+}
+
 footer, header {
   width: 100%;
   height: 100%;
@@ -133,7 +137,7 @@ header .LogoAndText img {
   overflow-x: wrap;
   overflow-y: auto;
 
-  background: #FFFFFF33;
+  background: #B68D40DD;
   border-radius: 10px;
   z-index: 256;
 

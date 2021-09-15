@@ -2,12 +2,14 @@ import SearchBar from './SearchBar.js';
 export default function Menu({
   items,
   onSearch,
+  onItemFounds,
   onSelect,
+  onSelectSearch,
   onJumpToEmptyMeal,
 }) {
   return (
     <div className="Menu">
-      <SearchBar onSearch={onSearch}/>
+      <SearchBar onItemFounds={onItemFounds} onSearch={onSearch} onSelect={onSelectSearch}/>
       <nav className="MenuItems">
         <ul>
           {items&&items.map((item, i) => {

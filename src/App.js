@@ -62,6 +62,7 @@ function App() {
   const [page, setPage] = useState(1);
   const [cats, setCats] = useState(null);
   const [meals, setMeals] = useState(null);
+  const [active, setActive] = useState(true);
 
   const [lock, setLock] = useState(false);
 
@@ -84,25 +85,57 @@ function App() {
         }
       }}>
       <Head/>
-      <Menu items={cats} onSearch={() => {}} onSelect={(item, i) => {
-        setSel(item);
+      <Menu items={cats}
+        onItemFounds={(active) => {
+          setActive(active);
+        }}
+        onSearch={async (query) => {
+          var res = await api.get(`/meals/?page=${page}&limit=99999&query=${encodeURIComponent(query)}`)
+          console.log(res);
+          return res.data
+        }}
+        onSelectSearch={(item) => {
+          var index = 0;
+          for (index in cats) {
+            if (cats[index].db_id === item.db_id)
+              break;
+          }
 
-        getMealsFromCat({
-          lock: lock,
-          setLock: setLock,
+          getMealsFromCat({
+            lock: lock,
+            setLock: setLock,
 
-          omeals: meals,
-          meal_count: item.meal_count,
+            omeals: meals,
+            meal_count: item.meal_count,
 
-          cat: item,
-          setMeals: (meals) => {
-            var ncats = cats;
-            ncats[item.index] = item;
-            setCats(ncats);
-            setMeals([...new Set(meals)]);
-          },
-        })
-      }}/>
+            cat: item,
+            setMeals: (meals) => {
+              var ncats = cats;
+              ncats[index] = item;
+              setCats(ncats);
+              setMeals([...new Set(meals)]);
+            },
+          })
+        }}
+        onSelect={(item, i) => {
+          setSel(item);
+
+          getMealsFromCat({
+            lock: lock,
+            setLock: setLock,
+
+            omeals: meals,
+            meal_count: item.meal_count,
+
+            cat: item,
+            setMeals: (meals) => {
+              var ncats = cats;
+              ncats[item.index] = item;
+              setCats(ncats);
+              setMeals([...new Set(meals)]);
+            },
+          })
+        }}/>
 
       <div className="Content">
         <MealList
