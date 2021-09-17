@@ -1,7 +1,7 @@
 import {toId} from '../util.js';
 import React, {useState, useEffect} from 'react';
 
-export default function SearchBar({onSearch, onItemFounds, onSelectSearch}) {
+export default function SearchBar({onSearch, onItemFounds, onSelect}) {
   const [items, setItems] = useState(null);
   const [query, setQuery] = useState(null);
   const [founds, setFounds] = useState(false);
@@ -71,7 +71,7 @@ export default function SearchBar({onSearch, onItemFounds, onSelectSearch}) {
           items.map((i, i_pos) => {
             return (<a href={toId(i.Name, true)}
               onClick={() => {
-                onSelectSearch(i.cat, i);
+                onSelect(i.cat, i);
                 setItems(null);
                 setQuery(null);
               }}

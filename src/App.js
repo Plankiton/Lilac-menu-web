@@ -94,7 +94,7 @@ function App() {
           console.log(res);
           return res.data
         }}
-        onSelectSearch={(item) => {
+        onSelectSearch={(item, i, onDone) => {
           var index = 0;
           for (index in cats) {
             if (cats[index].db_id === item.db_id)
@@ -114,6 +114,7 @@ function App() {
               ncats[index] = item;
               setCats(ncats);
               setMeals([...new Set(meals)]);
+              onDone();
             },
           })
         }}
