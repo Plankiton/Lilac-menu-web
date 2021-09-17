@@ -1,15 +1,9 @@
 import {toId} from '../util.js';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
-export default function SearchBar({onSearch, onItemFounds, onSelect}) {
+export default function SearchBar({onSearch, onSelect}) {
   const [items, setItems] = useState(null);
   const [query, setQuery] = useState(null);
-  const [founds, setFounds] = useState(false);
-
-  useEffect(() => {
-    console.log(items)
-    onItemFounds(founds);
-  }, [founds, items, onItemFounds])
   return (
     <div className="SearchBar" id="SearchBar">
       <input
@@ -64,10 +58,7 @@ export default function SearchBar({onSearch, onItemFounds, onSelect}) {
       />
 
       {items&&(<div
-        className="FoundItems"
-        onLoad={(e) => {
-          setFounds(true);
-        }}>{
+        className="FoundItems">{
           items.map((i, i_pos) => {
             return (<a href={toId(i.Name, true)}
               onClick={() => {
