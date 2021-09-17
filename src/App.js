@@ -8,18 +8,18 @@ import Head from './components/Head.js';
 import Menu from './components/Menu.js';
 import MealList from './components/MealList.js';
 
-function getMeals({page, omeals, ocats, setMeals, setCats, lock, setLock}) {
+function getMeals({omeals, ocats, setMeals, setCats, lock, setLock}) {
   if (!lock) {
     setLock(true);
 
-    api.get(`/meals/?page=${page}&limit=3`).then(res => {
+    api.get(`/meals/?page=1&limit=3`).then(res => {
       var cats = ocats?ocats:[];
       var meals = omeals?omeals:[];
 
       var i = cats.length;
       for (var cat of res.data) {
         meals.push([]);
-        cats.push({...cat, color: "var(--back)", text: "var(--fore)", label: cat.name, id: toId(cat.name), page})
+        cats.push({...cat, color: "var(--back)", text: "var(--fore)", label: cat.name, id: toId(cat.name)})
         for (var meal of cat.meals) {
           meals[i].push({...meal, cat: i});
         }
@@ -59,10 +59,8 @@ function getMealsFromCat({cat, setMeals, omeals, lock, setLock}) {
 
 function App() {
   const [sel, setSel] = useState(null);
-  const [page, setPage] = useState(1);
   const [cats, setCats] = useState(null);
   const [meals, setMeals] = useState(null);
-  const [active, setActive] = useState(true);
 
   const [lock, setLock] = useState(false);
 
@@ -71,7 +69,6 @@ function App() {
       onLoad={() => {
         if (!meals) {
           getMeals({
-            page: page,
             ocats: cats,
             omeals: meals,
 
@@ -86,11 +83,8 @@ function App() {
       }}>
       <Head/>
       <Menu items={cats}
-        onItemFounds={(active) => {
-          setActive(active);
-        }}
         onSearch={async (query) => {
-          var res = await api.get(`/meals/?page=${page}&limit=99999&query=${encodeURIComponent(query)}`)
+          var res = await api.get(`/meals/?page=1&limit=99999&query=${encodeURIComponent(query)}`)
           console.log(res);
           return res.data
         }}

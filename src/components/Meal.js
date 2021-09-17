@@ -1,5 +1,3 @@
-import {toId} from '../util.js';
-
 export default function Meal({scroll, setScroll, pos, length, name, desc, fullDesc, db_id, cat, id, price}) {
   try {
     var image = require(`../assets/${db_id}`).default;
