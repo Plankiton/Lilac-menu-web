@@ -9,7 +9,7 @@ export default function SearchBar({onSearch, onItemFounds, onSelect}) {
   useEffect(() => {
     console.log(items)
     onItemFounds(founds);
-  }, [founds, items])
+  }, [founds, items, onItemFounds])
   return (
     <div className="SearchBar" id="SearchBar">
       <input
