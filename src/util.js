@@ -6,6 +6,8 @@ export const api = axios.create({
 });
 
 export function toId(text, isLink = false) {
+	if (!text) return text;
+
 	var id = `${text.trim().replaceAll(" ", "-").toLowerCase()}`;
 	if (isLink)
 		return '#'+id;

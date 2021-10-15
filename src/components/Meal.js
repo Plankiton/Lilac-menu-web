@@ -1,4 +1,6 @@
-export default function Meal({scroll, setScroll, pos, length, name, desc, fullDesc, db_id, cat, id, price}) {
+import {memo} from 'react';
+
+export default memo(({scroll, setScroll, pos, length, name, desc, fullDesc, db_id, cat, id, price}) => {
   try {
     var image = require(`../assets/${db_id}`).default;
   } catch (e) {
@@ -22,4 +24,4 @@ export default function Meal({scroll, setScroll, pos, length, name, desc, fullDe
       </div>
     </div>
   );
-}
+});

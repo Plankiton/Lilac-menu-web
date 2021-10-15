@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {toId} from '../util.js';
 import Meal from './Meal.js';
 import Charging from './Charging.js';
 
 export default function MealList({cats, meals, selected, onCatScrollEnd, onSetCats}) {
+  const [lock, setLock] = useState(false);
 
   return (<div className="MealList">
     {cats&&cats.map((cat,c) => {
@@ -31,11 +32,14 @@ export default function MealList({cats, meals, selected, onCatScrollEnd, onSetCa
           }}
           onScroll={async (e) => {
             e.preventDefault();
-            if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight-1) {
+            if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight-20 && !lock) {
+              console.log("Scroll ENDDD");
               cat.page += 1;
               cats[cat.index] = cat
               onSetCats(cat, cats);
+              setLock(!lock);
               await onCatScrollEnd(cat)
+              setLock(!lock);
             }
           }}
           >

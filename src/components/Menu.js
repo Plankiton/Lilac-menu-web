@@ -1,4 +1,5 @@
 import SearchBar from './SearchBar.js';
+import Item from './Item.js';
 export default function Menu({
   items,
   onSearch,
@@ -14,19 +15,7 @@ export default function Menu({
         <ul>
           {items&&items.map((item, i) => {
             try {
-              return (<li key={item.id}>
-                <h3><span style={{backgroundColor: item.color, color: item.text}}>
-                  <a onClick={() => {
-                    onSelect(item, i, () => {
-                      if ((typeof item) == "string")
-                        return (<li><a href={`#${item}`}>{item}</a></li>);
-                      else if ((typeof item) == "function") {
-                        item = item(i);
-                      }
-                    });
-                  }} href={`#${item.id}`} style={{color: item.text}}>{item.label}</a>
-                </span></h3>
-              </li>);
+              return (<Item key={item.id} item={item} onSelect={(selFunc) => selFunc(item, i)}/>);
             } catch {
               return null;
             }
