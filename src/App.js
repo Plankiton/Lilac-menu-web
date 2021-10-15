@@ -12,7 +12,7 @@ function getMeals({omeals, ocats, setMeals, setCats, lock, setLock}) {
   if (!lock) {
     setLock(true);
 
-    api.get(`/meals/?page=1&limit=3`).then(res => {
+    api.get(`/meals/?page=1&limit=20`).then(res => {
       var cats = ocats?ocats:[];
       var meals = omeals?omeals:[];
 
@@ -88,14 +88,14 @@ function App() {
           console.log(res);
           return res.data
         }}
-        onSelectSearch={(item, i, onDone) => {
+        onSelectSearch={async (item, i, onDone) => {
           var index = 0;
           for (index in cats) {
             if (cats[index].db_id === item.db_id)
               break;
           }
 
-          getMealsFromCat({
+          await getMealsFromCat({
             lock: lock,
             setLock: setLock,
 
